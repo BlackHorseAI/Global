@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e73bd14f-d031-4190-ad3b-cb559c20ad60" name="Changes" comment="" />
+    <list default="true" id="e73bd14f-d031-4190-ad3b-cb559c20ad60" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/The_Global_Payment_Network.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/The_Global_Payment_Network.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/README.md.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_app/api/transactions.py/transactions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_app/api/v1/agints/agent.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_app/core/governance/dao/dao.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend_app/core/governance/dao/dao.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_app/core/identity/agent/agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend_app/core/identity/agent/agent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_app/core/user_manager/user_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend_app/core/user_manager/user_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_app/database/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend_app/database/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_app/database/database/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend_app/database/database/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_app/database/model/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend_app/database/model/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_app/main/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend_app/main/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements-dev.txt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements-dev.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,24 +39,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.Global Payment Netwock .executor": "Run",
-    "Python.main.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/mo263/PyCharmMiscProject/The_Global_Payment_Network",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.Global Payment Netwock .executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mo263/PyCharmMiscProject/The_Global_Payment_Network&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.main">
     <configuration name="Global Payment Netwock " type="PythonConfigurationType" factoryName="Python">
       <module name="The_Global_Payment_Network" />
@@ -141,6 +156,26 @@
       <workItem from="1752141762587" duration="474000" />
       <workItem from="1752198638754" duration="1470000" />
       <workItem from="1752203483835" duration="5315000" />
+      <workItem from="1752217100837" duration="3624000" />
+      <workItem from="1752221179337" duration="4025000" />
+      <workItem from="1752227476976" duration="494000" />
+      <workItem from="1752227981844" duration="520000" />
+      <workItem from="1752229341339" duration="4825000" />
+      <workItem from="1752236404312" duration="630000" />
+      <workItem from="1752237050471" duration="38000" />
+      <workItem from="1752237108908" duration="794000" />
+      <workItem from="1752237915409" duration="765000" />
+      <workItem from="1752241575168" duration="175000" />
+      <workItem from="1752292170012" duration="107000" />
+      <workItem from="1752293456191" duration="152000" />
+      <workItem from="1752293652806" duration="345000" />
+      <workItem from="1752294009301" duration="230000" />
+      <workItem from="1752294406633" duration="8000" />
+      <workItem from="1752294499654" duration="1171000" />
+      <workItem from="1752295762879" duration="570000" />
+      <workItem from="1752298129327" duration="356000" />
+      <workItem from="1752300119085" duration="1641000" />
+      <workItem from="1752302322037" duration="66000" />
     </task>
     <servers />
   </component>

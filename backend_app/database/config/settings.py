@@ -16,15 +16,15 @@ class Settings(BaseSettings):
     DB_NAME: str
     DB_HOST: str
     DB_PORT: str
-    DATABASE_URL: str | None = None
 
     # Celery & Redis settings
     CELERY_BROKER_URL: str
     CELERY_RESULT_BACKEND: str
 
     class Config:
+        # This tells pydantic to load the variables from a file named .env
         env_file = ".env"
         env_file_encoding = "utf-8"
 
-# Create a single, importable settings instance
+# Create a single, importable settings instance for the rest of the application
 settings = Settings()
