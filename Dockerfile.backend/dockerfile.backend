@@ -8,5 +8,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./backend_app $APP_HOME/backend_app
+# Copy Alembic files if you have them
+# COPY ./alembic.ini $APP_HOME/alembic.ini
+# COPY ./alembic $APP_HOME/alembic
 
 EXPOSE 8000

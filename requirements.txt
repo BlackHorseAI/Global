@@ -1,5 +1,6 @@
 fastapi
 uvicorn
+gunicorn
 sqlalchemy
 psycopg2-binary
 alembic
@@ -10,11 +11,7 @@ passlib[bcrypt]
 python-jose[cryptography]
 celery
 redis
-httpx
-aiohttp
-loguru
 streamlit
-pandas
-numpy
 requests
 cryptography
+pandas

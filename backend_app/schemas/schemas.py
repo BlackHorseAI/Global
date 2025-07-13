@@ -1,15 +1,13 @@
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional, List, Generic, TypeVar
 from datetime import datetime, timezone
-from enum import Enum
 import uuid
 
 PayloadData = TypeVar('PayloadData')
 
 
 class UserBase(BaseModel):
-    username: str = Field(..., min_length=3, max_length=50)
-    email: Optional[EmailStr] = None
+    username: str = Field(..., min_length=3)
     public_key: Optional[str] = None
 
 
@@ -28,17 +26,12 @@ class Token(BaseModel):
     token_type: str
 
 
-class AgentBase(BaseModel):
-    name: str = Field(..., min_length=2, max_length=100)
+class AgentCreate(BaseModel):
+    name: str = Field(..., min_length=2)
 
 
-class AgentCreate(AgentBase):
-    initial_balance: float = 0.0
-
-
-class Agent(AgentBase):
+class Agent(AgentCreate):
     id: int
-    balance: float
     owner_id: int
 
     class Config: from_attributes = True
