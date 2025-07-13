@@ -1,37 +1,114 @@
-from fastapi import FastAPI, Depends, HTTPException, status
-from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
-from .database.database import get_db
-from .api.v1 import agents # Simplified router import
-from .security_manager import verify_password, create_access_token
-from .schemas import Token, UserCreate, UserInDB
-from .core.user_manager import create_user, get_user_by_username
-from pydantic import BaseModel
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+import webauthn
+import json
+import os
 
-app = FastAPI(title="The Global Payment Network Backend")
+app = Flask(__name__)
+CORS(app)  # Allow requests from your Streamlit app
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:8501", "http://localhost"],
-    allow_credentials=True, allow_methods=["*"], allow_headers=["*"],
-)
+# --- WebAuthn Configuration ---
+RP_ID = "localhost"  # Relying Party ID
+RP_NAME = "The Global Payment Network"
+ORIGIN = "http://localhost:8501"  # The origin of your Streamlit app
+webauthn_helper = webauthn.WebAuthn(RP_ID, RP_NAME, webauthn.helpers.RP_ID_HASH_ALGORITHM.SHA256)
 
-app.include_router(agents.router, prefix="/api/v1/agents", tags=["Agents"])
+# --- Simulated User Database ---
+USER_DB_FILE = "user_database.json"
 
-class UserLogin(BaseModel):
-    username: str
-    password: str
 
-@app.post("/token", response_model=Token)
-async def login(form_data: UserLogin, db: Session = Depends(get_db)):
-    user = get_user_by_username(db, form_data.username)
-    if not user or not verify_password(form_data.password, user.hashed_password):
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect credentials")
-    access_token = create_access_token(data={"sub": user.username})
-    return {"access_token": access_token, "token_type": "bearer"}
+def get_users():
+    """Loads users from a JSON file."""
+    if not os.path.exists(USER_DB_FILE):
+        return {}
+    with open(USER_DB_FILE, 'r') as f:
+        return json.load(f)
 
-@app.post("/register", response_model=UserInDB)
-async def register(user_in: UserCreate, db: Session = Depends(get_db)):
-    if get_user_by_username(db, user_in.username):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already registered")
-    return create_user(db=db, user=user_in)
+
+def save_users(users):
+    """Saves the user dictionary to a JSON file."""
+    with open(USER_DB_FILE, 'w') as f:
+        json.dump(users, f, indent=4)
+
+
+# --- Registration Endpoints ---
+@app.route('/register/start', methods=['POST'])
+def register_start():
+    users = get_users()
+    username = request.json['username']
+
+    if username in users:
+        return jsonify({"error": "Username already exists."}), 400
+
+    user_info = webauthn.WebAuthnUser(
+        user_id=username.encode('utf-8'),
+        user_name=username,
+        user_display_name=username,
+        user_ico_url=None,
+        user_credentials=[]
+    )
+
+    options = webauthn_helper.registration_challenge(user_info)
+    users[username] = {"challenge": options, "credentials": []}
+    save_users(users)
+
+    return jsonify(options)
+
+
+@app.route('/register/verify', methods=['POST'])
+def register_verify():
+    users = get_users()
+    username = request.json['username']
+    response = request.json['response']
+
+    user_info = webauthn.WebAuthnUser.from_db(username, users[username]['credentials'])
+    challenge = users[username]['challenge']
+
+    try:
+        new_credential = webauthn_helper.verify_registration(user_info, challenge, response)
+        users[username]['credentials'].append(new_credential.to_db())
+        del users[username]['challenge']
+        save_users(users)
+        return jsonify({"verified": True})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+
+# --- Login Endpoints ---
+@app.route('/login/start', methods=['POST'])
+def login_start():
+    users = get_users()
+    username = request.json['username']
+
+    if username not in users:
+        return jsonify({"error": "User not found."}), 404
+
+    user_info = webauthn.WebAuthnUser.from_db(username, users[username]['credentials'])
+    challenge = webauthn_helper.authentication_challenge(user_info)
+    users[username]['challenge'] = challenge
+    save_users(users)
+
+    return jsonify(challenge)
+
+
+@app.route('/login/verify', methods=['POST'])
+def login_verify():
+    users = get_users()
+    username = request.json['username']
+    response = request.json['response']
+
+    user_info = webauthn.WebAuthnUser.from_db(username, users[username]['credentials'])
+    challenge = users[username]['challenge']
+
+    try:
+        webauthn_helper.verify_authentication(user_info, challenge, response)
+        del users[username]['challenge']
+        save_users(users)
+        # In a real app, you would issue a session token here.
+        return jsonify({"verified": True})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+
+if __name__ == '__main__':
+    app.run(port=5000, debug=True)
